@@ -3,8 +3,8 @@ public class Main {
     {
         //Refrigerator refrigerator = new Refrigerator();
         //refrigerator.calculateFridgeUnits();
-        //RefrigiratorGUI refrigratorGUI = new RefrigiratorGUI();
-        //refrigratorGUI.calculateFridgeUnits();
+        RefrigiratorGUI refrigratorGUI = new RefrigiratorGUI();
+        refrigratorGUI.calculateFridgeUnits();
         FanGui fanGui = new FanGui();
         fanGui.calculateFanUnits();
     }
