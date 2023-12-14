@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class CeilingFan extends Appliances {
+class CeilingFan extends Appliances {
     public void calculateFanUnits() {
         Scanner scan = new Scanner(System.in);
 

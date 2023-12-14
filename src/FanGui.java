@@ -1,9 +1,31 @@
 import javax.swing.*;
 
-public class FanGui extends Appliances{
+class FanGui extends Appliances{
     public void calculateFanUnits()
     {
         try{
+            String[] options = {"Yes, Let's Go!", "Not Right Now"};
+        
+            int choice = JOptionPane.showOptionDialog(null,
+                    "Are you ready to start the adventure?",
+                    "Let's Do I!",
+                    JOptionPane.YES_NO_OPTION,
+                    JOptionPane.INFORMATION_MESSAGE,
+                    null,
+                    options,
+                    options[0]);
+            
+            if (choice == JOptionPane.NO_OPTION) {
+                JOptionPane.showMessageDialog(null,
+                        "Take your time! When you're ready, Just Click 'Yes, Let's Go!'",
+                        "Ready When You Are",
+                        JOptionPane.INFORMATION_MESSAGE);
+            } else
+             {
+                JOptionPane.showMessageDialog(null,
+                        "Great! Let's Start Then.",
+                        "'Financial' Adventure Awaits!",
+                        JOptionPane.INFORMATION_MESSAGE);
             String WattsInput = JOptionPane.showInputDialog("Enter Amount of Watts Your Fan is: ");
             super.watts = Double.parseDouble(WattsInput);
 
@@ -14,7 +36,7 @@ public class FanGui extends Appliances{
             {
                 super.kwh = ((super.watts * super.hours)*30)/1000;
 
-                String message = "As per the usage of a " + super.watts + " Watts Fan being used " + super.hours + " hours it consumes " + super.kwh + " kwh units a month";
+                String message = "As per the usage of a " + super.watts + " Watts Fan being used " + super.hours + " hours \nIt consumes " + super.kwh + " kwh units a month";
 
                 if(super.kwh>=1 && super.kwh<=50)
                 {
@@ -42,15 +64,15 @@ public class FanGui extends Appliances{
                 }
 
                 super.bill = super.kwh * super.kwh;
-                message += "\nAs per today's unit price Rs " + super.unitprice + " your expected monthly bill will be: Rs " + super.bill;
-                message += "\nPlease Keep in Mind that this expected bill is before Taxes ";
-
+                message += "\nAs per today's unit price Rs " + super.unitprice + " \nYour expected monthly bill will be: Rs " + super.bill;
                 JOptionPane.showMessageDialog(null,message);
+                JOptionPane.showMessageDialog(null, "Please Keep in Mind that this expected bill is before Taxes ", "Reminder", JOptionPane.INFORMATION_MESSAGE);
             }
             else
             {
                 JOptionPane.showMessageDialog(null,"Please Enter Hours Between 1-24");
             }
+        }
         }
         catch (Exception e)
         {

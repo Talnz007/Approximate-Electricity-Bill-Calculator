@@ -1,5 +1,5 @@
 import java.util.Scanner;
-public class Refrigerator extends  Appliances{
+class Refrigerator extends  Appliances{
     public void calculateFridgeUnits()
     {
         Scanner scanner = new Scanner(System.in);

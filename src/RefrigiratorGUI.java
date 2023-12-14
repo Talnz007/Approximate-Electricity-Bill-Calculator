@@ -1,18 +1,42 @@
 import javax.swing.*;
 
-public class RefrigiratorGUI extends Appliances {
+class RefrigiratorGUI extends Appliances {
     public void calculateFridgeUnits() {
-        try {
-            String wattsInput = JOptionPane.showInputDialog("Enter the watts of your Refrigerator: ");
-            super.watts = Double.parseDouble(wattsInput);
+        try{
+            String[] options = {"Yes, Let's Go!", "Not Right Now"};
+        
+            int choice = JOptionPane.showOptionDialog(null,
+                    "Are you ready to start the adventure?",
+                    "Let's Do I!",
+                    JOptionPane.YES_NO_OPTION,
+                    JOptionPane.INFORMATION_MESSAGE,
+                    null,
+                    options,
+                    options[0]);
+            
+            if (choice == JOptionPane.NO_OPTION) {
+                JOptionPane.showMessageDialog(null,
+                        "Take your time! When you're ready, Just Click 'Yes, Let's Go!'",
+                        "Ready When You Are",
+                        JOptionPane.INFORMATION_MESSAGE);
+            } else
+             {
+                JOptionPane.showMessageDialog(null,
+                        "Great! Let's Start Then.",
+                        "'Financial' Adventure Awaits!",
+                        JOptionPane.INFORMATION_MESSAGE);
+            
+            String WattsInput = JOptionPane.showInputDialog("Enter Amount of Watts Your Refrigirator is: ");
+            super.watts = Double.parseDouble(WattsInput);
 
-            String hoursInput = JOptionPane.showInputDialog("How many hours is the fridge turned on: ");
-            super.hours = Integer.parseInt(hoursInput);
+            String HoursInput = JOptionPane.showInputDialog("How Many Hours a Day the Refrigirator is Used: ");
+            super.hours = Integer.parseInt(HoursInput);
 
-            if (super.hours >= 1 && super.hours <= 24) {
-                super.kwh = ((super.watts * super.hours) * 30) / 1000.0;
+            if(hours>=1 && hours<=24)
+            {
+                super.kwh = ((super.watts * super.hours)*30)/1000;
 
-                String message = "As per the usage of " + super.watts + " watts Refrigerator being used " + super.hours + " hours consumes: " + super.kwh + " kwh a month\n";
+                String message = "As per the usage of a " + super.watts + " Watts Refrigirator being used " + super.hours + " hours \nIt consumes " + super.kwh + " kwh units a month";
 
                 if(super.kwh>=1 && super.kwh<=50)
                 {
@@ -39,17 +63,20 @@ public class RefrigiratorGUI extends Appliances {
                     super.unitprice = 24.93;
                 }
 
-                super.bill = super.kwh * super.unitprice;
-                message += "As per today's unit price based on your units: " + super.kwh + " your bill will roughly be: Rs " + super.bill + "\n";
-                message += "Keep in mind this Bill is Without Taxes and Other Charges";
-
-                JOptionPane.showMessageDialog(null, message);
-            } else {
-                JOptionPane.showMessageDialog(null, "Please enter hours between 1-24");
+                super.bill = super.kwh * super.kwh;
+                message += "\nAs per today's unit price Rs " + super.unitprice + " \nYour expected monthly bill will be: Rs " + super.bill;
+                JOptionPane.showMessageDialog(null,message);
+                JOptionPane.showMessageDialog(null, "Please Keep in Mind that this expected bill is before Taxes ", "Reminder", JOptionPane.INFORMATION_MESSAGE);
             }
-
-        } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(null, "Please enter valid numeric values for watts and hours.");
+            else
+            {
+                JOptionPane.showMessageDialog(null,"Please Enter Hours Between 1-24");
+            }
+        }
+        }
+        catch (Exception e)
+        {
+            JOptionPane.showMessageDialog(null,"Please enter valid numeric values for watts and hours");
         }
     }
 }
