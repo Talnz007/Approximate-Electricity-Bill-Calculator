@@ -1,82 +1,106 @@
 import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-class RefrigiratorGUI extends Appliances {
-    public void calculateFridgeUnits() {
-        try{
-            String[] options = {"Yes, Let's Go!", "Not Right Now"};
-        
-            int choice = JOptionPane.showOptionDialog(null,
-                    "Are you ready to start the adventure?",
-                    "Let's Do I!",
-                    JOptionPane.YES_NO_OPTION,
-                    JOptionPane.INFORMATION_MESSAGE,
-                    null,
-                    options,
-                    options[0]);
-            
-            if (choice == JOptionPane.NO_OPTION) {
-                JOptionPane.showMessageDialog(null,
-                        "Take your time! When you're ready, Just Click 'Yes, Let's Go!'",
-                        "Ready When You Are",
-                        JOptionPane.INFORMATION_MESSAGE);
-            } else
-             {
-                JOptionPane.showMessageDialog(null,
-                        "Great! Let's Start Then.",
-                        "'Financial' Adventure Awaits!",
-                        JOptionPane.INFORMATION_MESSAGE);
-            
-            String WattsInput = JOptionPane.showInputDialog("Enter Amount of Watts Your Refrigirator is: ");
-            super.watts = Double.parseDouble(WattsInput);
+public class RefrigiratorGUI extends JFrame implements ActionListener {
+    JButton button,button2;
+    JLabel label1, label2, label3, labelImage;
+    JTextField textField1, textField2;
 
-            String HoursInput = JOptionPane.showInputDialog("How Many Hours a Day the Refrigirator is Used: ");
-            super.hours = Integer.parseInt(HoursInput);
+    public RefrigiratorGUI(Main main) {
+        setLayout(new BorderLayout());
 
-            if(hours>=1 && hours<=24)
-            {
-                super.kwh = ((super.watts * super.hours)*30)/1000;
+        JPanel topPanel = new JPanel(new GridLayout(4, 1));
+        JPanel bottomPanel = new JPanel(new FlowLayout());
 
-                String message = "As per the usage of a " + super.watts + " Watts Refrigirator being used " + super.hours + " hours \nIt consumes " + super.kwh + " kwh units a month";
+        label1 = new JLabel("Amount of Hours Refrigirator is used: ");
+        label2 = new JLabel("Amount of Watts Your Refrigirator is: ");
+        label3 = new JLabel(" ");
 
-                if(super.kwh>=1 && super.kwh<=50)
-                {
-                    super.unitprice = 4.81;
-                }
-                else if(super.kwh>50 && super.kwh<=100)
-                {
-                    super.unitprice = 7.87;
-                }
-                else if(super.kwh>100 && super.kwh<=200)
-                {
-                    super.unitprice = 10.54;
-                }
-                else if(super.kwh>200 && super.kwh<=300)
-                {
-                    super.unitprice = 12.89;
-                }
-                else if(super.kwh>300 && super.kwh<=700)
-                {
-                    super.unitprice = 21.88;
-                }
-                else if(super.kwh>700)
-                {
-                    super.unitprice = 24.93;
-                }
+        textField1 = new JTextField(10);
+        textField2 = new JTextField(10);
 
-                super.bill = super.kwh * super.kwh;
-                message += "\nAs per today's unit price Rs " + super.unitprice + " \nYour expected monthly bill will be: Rs " + super.bill;
-                JOptionPane.showMessageDialog(null,message);
-                JOptionPane.showMessageDialog(null, "Please Keep in Mind that this expected bill is before Taxes ", "Reminder", JOptionPane.INFORMATION_MESSAGE);
+        button = new JButton("Calculate");
+        button2 = new JButton("Choose Another Appliance");
+        button.addActionListener(this);
+        button2.addActionListener(this);
+    
+        try {
+            ImageIcon icon = new ImageIcon("D:\\Java Programs\\ELECTRICITY BILL CALCULATOR\\src\\pngegg.png"); // Replace with your image file path
+            Image img = icon.getImage();
+            Image scaledImg = img.getScaledInstance(500, 500, Image.SCALE_SMOOTH);
+            ImageIcon scaledIcon = new ImageIcon(scaledImg);
+            labelImage = new JLabel(scaledIcon);
+            bottomPanel.add(labelImage);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+
+        topPanel.add(label1);
+        topPanel.add(textField1);
+        topPanel.add(label2);
+        topPanel.add(textField2);
+        topPanel.add(button);
+        topPanel.add(button2);
+        topPanel.add(label3);
+
+        add(topPanel, BorderLayout.CENTER);
+        add(bottomPanel, BorderLayout.SOUTH);
+
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setSize(1920, 1080);
+        setTitle("Refrigirator");
+        setVisible(true);
+    }
+
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == button) {
+            try {
+                String Hours = textField1.getText();
+                String Watts = textField2.getText();
+
+                double hours = Double.parseDouble(Hours);
+                double watts = Double.parseDouble(Watts);
+                double kwh;
+                double unitprice=0;
+                double bill;
+                if (hours >= 1 && hours <= 24) {
+                    kwh = ((watts * hours) * 30) / 1000;
+
+                    if (kwh >= 1 && kwh <= 50) {
+                        unitprice = 4.81;
+                    } else if (kwh > 50 && kwh <= 100) {
+                        unitprice = 7.87;
+                    } else if (kwh > 100 && kwh <= 200) {
+                        unitprice = 10.54;
+                    } else if (kwh > 200 && kwh <= 300) {
+                        unitprice = 12.89;
+                    } else if (kwh > 300 && kwh <= 700) {
+                        unitprice = 21.88;
+                    } else if (kwh > 700) {
+                        unitprice = 24.93;
+                    }
+                    bill = kwh * unitprice;
+                    label3.setText("Your Approximate Monthly Electricity Bill will be: " + bill);
+                }
+                else
+                {
+                    label3.setText("Please Enter Valid amount of Hours ");
+                }
             }
-            else
+            catch (Exception exception)
             {
-                JOptionPane.showMessageDialog(null,"Please Enter Hours Between 1-24");
+                label3.setText("Invalid Input");
             }
         }
-        }
-        catch (Exception e)
+        else if(e.getSource() == button2)
         {
-            JOptionPane.showMessageDialog(null,"Please enter valid numeric values for watts and hours");
+            dispose();
+            Main mainInstance = new Main();
+            mainInstance.showApplianceSelection(); // Call the method using an instance
+
+            
         }
     }
 }

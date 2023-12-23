@@ -3,22 +3,21 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class FanGui extends JFrame implements ActionListener {
-    private Main main; // Reference to the Main class
-
+public class LightGui extends JFrame implements ActionListener {
+    private Main main;
     JButton button,button2;
     JLabel label1, label2, label3, labelImage;
     JTextField textField1, textField2;
 
-    public FanGui(Main main) {
+    public LightGui (Main main) {
         this.main = main;
         setLayout(new BorderLayout());
 
         JPanel topPanel = new JPanel(new GridLayout(4, 1));
         JPanel bottomPanel = new JPanel(new FlowLayout());
 
-        label1 = new JLabel("Amount of Hours Fan is used: ");
-        label2 = new JLabel("Amount of Watts Your Fan is: ");
+        label1 = new JLabel("Amount of Hours Light is used: ");
+        label2 = new JLabel("Amount of Watts Your Light is: ");
         label3 = new JLabel(" ");
 
         textField1 = new JTextField(10);
@@ -26,11 +25,11 @@ public class FanGui extends JFrame implements ActionListener {
 
         button = new JButton("Calculate");
         button2 = new JButton("Choose Another Appliance");
-        button.addActionListener(this);
         button2.addActionListener(this);
+        button.addActionListener(this);
 
         try {
-            ImageIcon icon = new ImageIcon("D:\\Java Programs\\ELECTRICITY BILL CALCULATOR\\src\\pngwing.com(2).png"); // Replace with your image file path
+            ImageIcon icon = new ImageIcon("D:\\Java Programs\\ELECTRICITY BILL CALCULATOR\\src\\pngwing.com(3).png"); // Replace with your image file path
             Image img = icon.getImage();
             Image scaledImg = img.getScaledInstance(500, 500, Image.SCALE_SMOOTH);
             ImageIcon scaledIcon = new ImageIcon(scaledImg);
@@ -53,7 +52,7 @@ public class FanGui extends JFrame implements ActionListener {
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(1920, 1080);
-        setTitle("Ceiling Fan");
+        setTitle("Light");
         setVisible(true);
     }
 
