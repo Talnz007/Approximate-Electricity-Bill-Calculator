@@ -16,4 +16,9 @@ This tool provides a quick estimate of your electricity bill based on usage data
 ![Screenshot 4](https://github.com/Talnz007/Approximate-Electricity-Bill-Calculator/assets/117588324/149a2d1d-d60a-46ed-8473-00f50990b304)
 ![Screenshot 5](https://github.com/Talnz007/Approximate-Electricity-Bill-Calculator/assets/117588324/ac2a9835-10d4-4efc-be30-0b3897780c2f)
 
+### **Access the Project:**
+
+- **GitHub Repository:** [Approximate Electricity Bill Calculator](https://github.com/Talnz007/Approximate-Electricity-Bill-Calculator)
+- **Live Demo (GitHub Pages):** [Approximate Electricity Bill Calculator Demo](https://talnz007.github.io/Approximate-Electricity-Bill-Calculator/)
+
 Feel free to contribute or fork this repository to enhance the functionality or customize it according to your preferences!
